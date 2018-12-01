@@ -1,24 +1,10 @@
-/*************************************************************
-
-You should implement your request handler function in this file.
-
-requestHandler is already getting passed to http.createServer()
-in basic-server.js, but it won't work as is.
-
-You'll have to figure out a way to export this function from
-this file and include it in basic-server.js so that it actually works.
-
-*Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
-
-**************************************************************/
 const url = require('url');
 
-var example = {username: 'admin', createdAt: new Date(), text: 'You shall work', objectId: 0};
+var example = {username: 'Admin', createdAt: new Date(), text: 'Have fun :)', objectId: 0};
 var storage = [example];
 var currentId = 1;
-var requestHandler = function(request, response) {
-  // console.log('Serving request type ' + request.method + ' for url ' + request.url);
-  
+
+var requestHandler = function(request, response) {  
   var defaultCorsHeaders = {
     'access-control-allow-origin': '*',
     'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -28,8 +14,7 @@ var requestHandler = function(request, response) {
   var headers = defaultCorsHeaders;
   headers['Content-Type'] = 'application/json';
   
-  let requestURL = url.parse(request.url);
-  // console.log(request);
+  var requestURL = url.parse(request.url);
   
   if (requestURL.pathname === '/classes/messages') {
     if (request.method === 'GET') {
@@ -39,26 +24,24 @@ var requestHandler = function(request, response) {
     }
     
     if (request.method === 'POST') {
-      console.log('hi');
-    
-      let body = [];
-      request.on('data', chunk => {
-        body.push(chunk);
-      }).on('end', () => {
-        let bodyObj = JSON.parse(Buffer.concat(body).toString());
-        bodyObj.createdAt = new Date();
-        bodyObj.objectId = currentId;
+      var message = [];
+      
+      request.on('data', chunk => { //Read message data from stream
+        message.push(chunk);
+      });
+      request.on('end', () => {
+        var messageObj = JSON.parse(Buffer.concat(message).toString());
+        messageObj.objectId = currentId
+        messageObj.createdAt = new Date();
         currentId++;
-        
-        storage.unshift(bodyObj);
+        storage.unshift(messageObj);
         response.writeHead(201, headers);
-        console.log(body, 'what');
-        response.end(JSON.stringify({objectId: bodyObj.objectId, createdAt: bodyObj.createdAt}));
+        //Return objectId and createdAt for modifying the client-side message object
+        response.end(JSON.stringify({objectId: messageObj.objectId, createdAt: messageObj.createdAt}));
       });
     }
     
     if (request.method === 'OPTIONS') {
-      // console.log('options');
       response.writeHead(200, headers);
       response.end();
     }
@@ -69,40 +52,3 @@ var requestHandler = function(request, response) {
 };
 
 exports.requestHandler = requestHandler;
-
-
-
-// var requestHandler = function(request, response) {
-//   var statusCode = 200;
-//   var headers = defaultCorsHeaders;
-//   headers['Content-Type'] = 'application/json';
-  
-//   if (request.url === '/classes/message') {
-//     if (request.method === 'GET') {
-//         fs.readFile(path, 'utf8', function(err, data) {
-//           if (err) {
-//             response.writeHead(404);
-//             response.end();
-//           } else {
-//             data = JSON.Parse('[' + data + ']');
-//             response.writeHead(200, headers);
-//             response.end(JSON.stringify({results: data}));
-//           }
-//         });
-//     } else if (request.method === 'POST') {
-//       request.on('data', function(){
-//         fs.appendFile(path, [option], function(err) {
-//           if (err) {
-//             response.writeHead(404);
-//           } else {
-//             response.writeHead(201, headers);
-//           }
-//         })
-//         request.on('end', function () {
-//           response.end('{"Success": "Success", "sourceCode": 201}')
-//         })
-//       })
-//     }
-//   } response.writeHead(404, headers)
-//   response.end
-// }
