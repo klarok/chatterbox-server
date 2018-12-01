@@ -13,8 +13,9 @@ this file and include it in basic-server.js so that it actually works.
 **************************************************************/
 const url = require('url');
 
-var storage = [];
-
+var example = {username: 'admin', createdAt: new Date(), text: 'You shall work', objectId: 0};
+var storage = [example];
+var currentId = 1;
 var requestHandler = function(request, response) {
   // console.log('Serving request type ' + request.method + ' for url ' + request.url);
   
@@ -39,15 +40,20 @@ var requestHandler = function(request, response) {
     
     if (request.method === 'POST') {
       console.log('hi');
+    
       let body = [];
       request.on('data', chunk => {
         body.push(chunk);
       }).on('end', () => {
         let bodyObj = JSON.parse(Buffer.concat(body).toString());
+        bodyObj.createdAt = new Date();
+        bodyObj.objectId = currentId;
+        currentId++;
+        
         storage.unshift(bodyObj);
         response.writeHead(201, headers);
-        console.log(bodyObj, 'what');
-        response.end('{}');
+        console.log(body, 'what');
+        response.end(JSON.stringify({objectId: bodyObj.objectId, createdAt: bodyObj.createdAt}));
       });
     }
     
