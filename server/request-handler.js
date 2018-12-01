@@ -11,6 +11,7 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+const url = require('url');
 var storage = require('./storage.js')['storage'];
 var defaultCorsHeaders = {
   'access-control-allow-origin': '*',
@@ -22,6 +23,9 @@ var defaultCorsHeaders = {
 var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
   
+  let requestURL = url.parse(request.url);
+  console.log(requestURL);
+  
   var routes = {
     '/classes/messages' : true
   };
@@ -30,13 +34,31 @@ var requestHandler = function(request, response) {
   headers['Content-Type'] = 'application/json';
   
   var statusCode = 200;
-  if (!routes.hasOwnProperty(request.url)) {
+  var data = null;
+  
+  if (!routes.hasOwnProperty(requestURL.pathname)) {
     statusCode = 404;
   }
   
-  response.writeHead(statusCode, headers); 
-  console.log(response._responseCode);
-  response.end('Hello, World!');
+  
+  if (request.method === 'GET') {
+    data = storage;
+  }
+  if (request.method === 'POST') {
+    statusCode = 201;
+    // storage.unshift(request._postData);
+    // data = storage;
+    // console.log(request._postData);
+    request.on('data', chunk => {
+      let d = JSON.parse(chunk.toString('utf8'));
+      storage.unshift(d);
+      // console.log(d);
+      // console.log(storage);
+    });
+  }
+  
+  response.writeHead(statusCode, headers);
+  response.end(JSON.stringify({ results: data }));
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -50,4 +72,4 @@ var requestHandler = function(request, response) {
 // client from this domain by setting up static file serving.
 
 
-exports.handleRequest = requestHandler;
+exports.requestHandler = requestHandler;

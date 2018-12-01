@@ -1,7 +1,7 @@
 /* Import node's http module: */
 
 var http = require('http');
-var handleRequest = require('./request-handler.js')['handleRequest'];
+var handleRequest = require('./request-handler.js')['requestHandler'];
 
 var port = 3000;
 var ip = '127.0.0.1';
