@@ -45,6 +45,7 @@ var requestHandler = function(request, response) {
       response.writeHead(200, headers);
       response.end();
     }
+    
   } else {
     response.writeHead(404, headers);
     response.end();

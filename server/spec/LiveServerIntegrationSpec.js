@@ -1,6 +1,34 @@
 var request = require('request');
 var expect = require('chai').expect;
 
+var meme1 = 
+`░░░░░░░░░░░░░░░░░░░░░░░░░░█▄
+░▄▄▄▄▄▄░░░░░░░░░░░░░▄▄▄▄▄░░█▄
+░▀▀▀▀▀███▄░░░░░░░▄███▀▀▀▀░░░█▄
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█
+░▄▀▀▀▀▀▄░░░░░░░░░░▄▀▀▀▀▀▄░░░░█
+█▄████▄░▀▄░░░░░░▄█░▄████▄▀▄░░█▄
+████▀▀██░▀▄░░░░▄▀▄██▀█▄▄█░█▄░░█
+██▀██████░█░░░░█░████▀█▀██░█░░█
+████▀▄▀█▀░█░░░░█░█████▄██▀▄▀░░█
+███████▀░█░░░░░░█░█████▀░▄▀░░░█
+░▀▄▄▄▄▄▀▀░░░░░░░░▀▀▄▄▄▄▀▀░░░░░█
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█
+░░▓▓▓▓▓▓▓░░░░░░░░░░▓▓▓▓▓▓▓░░░░█
+░░░▓▓▓▓▓░░░░░░░░░░░░▓▓▓▓▓░░░░░█
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀
+░░░░░░░░░▄▄███████▄▄░░░░░░░░░█
+░░░░░░░░█████████████░░░░░░░█▀
+░░░░░░░░░▀█████████▀░░░░░░░█▀
+░░░░░░░░░░░░░░░░░░░░░░░░░░█▀
+░░░░░░░░░░░░░░░░░░░░░░░░░█▀`;
+
+var lapras = 
+`─────────────────███▓ ─────████───────█────▓ ───██░───██────█░░────▓ ──█░───────█───█░░░░──▓ ──█░░─░─────███████░░░─▓ ─█░░░░██────█──────██░░▓ ─█░░░█░░█───▓────────█░▓██ ─█░░░░░░░█────────────██──█ ──█░░░░░░█───────────░░───█ ──█░░░░░░█░──────────────█ ───██░░░█░░░──────────░─░█ ─────███░░░░░▓██░░▒────░░█ ──────█░░░░░────█░░▒──────▓ ──────█░░▓░░───▒─█░▒──────▓ ──────█░▓▓░░░░─█▒█░▒──────▓ ──────█░▓░░░░░░▓███────────▓ ──────█░░░░▒█░░░░░░░░─────░█ ───────█░░▒▒▒█░░░░░░░░░░░░░█ ───────█░░▒▒▒▒▓░░░░░░░░░░░░█ ───────█░░▒▒▒▒▒██░░░░░░░▓░░█ ────────█░▒▒▓▒▒▒▒███▓▓░░░░█ ────────█░░▒▒▓▓▒▒▒▒▒▒▒▓▓░░█ ────────█░░▒▒▒▒▓▓██████─██ ────────█░░▒▒▒▒▒▒█`;
+
+var salt = `▒▒▒▒▒▒▒▒▒▒▒▒▒▒▄▄██████▄ ▒▒▒▒▒▒▒▒▒▒▄▄████████████▄ ▒▒▒▒▒▒▄▄██████████████████ ▒▒▒▄████▀▀▀██▀██▌███▀▀▀████ ▒▒▐▀████▌▀██▌▀▐█▌████▌█████▌ ▒▒█▒▒▀██▀▀▐█▐█▌█▌▀▀██▌██████ ▒▒█▒▒▒▒████████████████████▌ ▒▒▒▌▒▒▒▒█████░░░░░░░██████▀ ▒▒▒▀▄▓▓▓▒███░░░░░░█████▀▀ ▒▒▒▒▀░▓▓▒▐█████████▀▀▒ ▒▒▒▒▒░░▒▒▐█████▀▀▒▒▒▒▒▒ ▒▒░░░░░▀▀▀▀▀▀▒▒▒▒▒▒▒▒▒ ▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒`;
+
 describe('server', function() {
   it('should respond to GET requests for /classes/messages with a 200 status code', function(done) {
     request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
@@ -37,8 +65,8 @@ describe('server', function() {
     var requestParams = {method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/messages',
       json: {
-        username: 'Jono',
-        text: 'Do my bidding!'}
+        username: 'NotSoBonoJono',
+        text: '⠄⠄⠄⠄⠄⠄⣀⣀⣀⣤⣶⣿⣿⣶⣶⣶⣤⣄⣠⣴⣶⣿⣿⣿⣿⣶⣦⣄⠄⠄ ⠄⠄⣠⣴⣾⣿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦ ⢠⠾⣋⣭⣄⡀⠄⠄⠈⠙⠻⣿⣿⡿⠛⠋⠉⠉⠉⠙⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿ ⡎⣾⡟⢻⣿⣷⠄⠄⠄⠄⠄⡼⣡⣾⣿⣿⣦⠄⠄⠄⠄⠄⠈⠛⢿⣿⣿⣿⣿⣿ ⡇⢿⣷⣾⣿⠟⠄⠄⠄⠄⢰⠁⣿⣇⣸⣿⣿⠄⠄⠄⠄⠄⠄⠄⣠⣼⣿⣿⣿⣿ ⢸⣦⣭⣭⣄⣤⣤⣤⣴⣶⣿⣧⡘⠻⠛⠛⠁⠄⠄⠄⠄⣀⣴⣿⣿⣿⣿⣿⣿⣿ ⠄⢉⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣦⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⢰⡿⠛⠛⠛⠛⠻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠸⡇⠄⠄⢀⣀⣀⠄⠄⠄⠄⠄⠉⠉⠛⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠄⠈⣆⠄⠄⢿⣿⣿⣿⣷⣶⣶⣤⣤⣀⣀⡀⠄⠄⠉⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠄⠄⣿⡀⠄⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠂⠄⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠄⠄⣿⡇⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠄⠄⣿⡇⠄⠠⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠄⠄⣿⠁⠄⠐⠛⠛⠛⠛⠉⠉⠉⠉⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿ ⠄⠄⠻⣦⣀⣀⣀⣀⣀⣀⣤⣤⣤⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄'}
     };
 
     request(requestParams, function(error, response, body) {
@@ -51,21 +79,78 @@ describe('server', function() {
     var requestParams = {method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/messages',
       json: {
-        username: 'Jono',
-        text: 'Do my bidding!'}
+        username: 'NotSoBonoJono',
+        text: '─────────────────▄▄█▀▀▀▀▀▀▀▄▄─ ───────────────▄█▀░░░░░░░░░░▀▀ ─────────────▄█▀░░░░░░░░░░░░░░ ────────────▄▀░░░░░░░░░░░░░░░░ ──────────▄█░░░░░░▄░░░░░░░░▄░░ ──────────█░░░░░░█▀█░░░░░░█▀█░ ─────▄───█░░░░░░░█─█░░░░░░█─█░ ─▄█▀██▀▄▄▀░░░░░░░█─█░░░░░░█─█░ ▀▒▒▒▒▒▀█▀▄▄░░░░░░███░░░░░░███░ ▒▒▄▄▄▒▒█▓▓▀▀█▄░░░███░░░░░░███░ ▒▄███▄▒█▓▓▓▓▓▀█▄░█▓█░░░░░░█▓█░ ▒█████▒█▓▓▓▓▓▓▓▀██▓█░░░░░░█▓█░ ▒▀███▀▒█▓▓▓▓▓▓▓▓█▀█▀░░░░░░▀█▀░ ▄▒▀▀▀▒█▄▄▄▄▓▓▓▓▓█░░░░░░░░░░░░░ ▀▄▒▒▒▒▄▀▀████▄▄▄█░░░░░░░░░░░░░ █▒▒▒▒▒█▓▓▓▓▓▓▀▀▀█░░░░░░░░░░░░░ █▒▒▒▒█▀▓▓▓▓▓▓▓▓▓█░█░░░░░░░░█░░ █▒▀▀▒█▓▓▓▓▓▓▓▓▓▄▀░██▄▄░░▄▄██░░ █▒▒▒▒█▓▓▓█▓▓▓▓▓█▄░░▀▀████▀▀░░░ ─█▄▄██▄▄▄▀▓▓▓▓▓█▀▄░░░░░░░░░░░░ ───█▀▄▓▓▄▄▓▓▓▓▓█░░█░░░░░░░░░░░ ───█░█▓█░░█▄▓▓█░░░█░░░░░░░░░░░ ───█░█▓█░░░█▓▓█░░▄▀░░░░░░░░░░░ ───▀▄█▓█▄▀▀█▓▓█░█░░░░░░░░░░░░░ ───▄▄█▓▓▀▀▀▄▄▀█▄▀▄░░░░░░░░░░░░ ─▄▀▒▒▒█▀▀▀▀░▄▀██░█░░░░░░░░░░░░ ▄▀▒▒▒▒█░░░░░█▄▀▀█▀░░░░░░░░░░░░'}
     };
 
     request(requestParams, function(error, response, body) {
       // Now if we request the log, that message we posted should be there:
       request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
         var messages = JSON.parse(body).results;
-        expect(messages[0].username).to.equal('Jono');
-        expect(messages[0].text).to.equal('Do my bidding!');
+        expect(messages[0].username).to.equal('NotSoBonoJono');
+        expect(messages[0].text).to.equal('─────────────────▄▄█▀▀▀▀▀▀▀▄▄─ ───────────────▄█▀░░░░░░░░░░▀▀ ─────────────▄█▀░░░░░░░░░░░░░░ ────────────▄▀░░░░░░░░░░░░░░░░ ──────────▄█░░░░░░▄░░░░░░░░▄░░ ──────────█░░░░░░█▀█░░░░░░█▀█░ ─────▄───█░░░░░░░█─█░░░░░░█─█░ ─▄█▀██▀▄▄▀░░░░░░░█─█░░░░░░█─█░ ▀▒▒▒▒▒▀█▀▄▄░░░░░░███░░░░░░███░ ▒▒▄▄▄▒▒█▓▓▀▀█▄░░░███░░░░░░███░ ▒▄███▄▒█▓▓▓▓▓▀█▄░█▓█░░░░░░█▓█░ ▒█████▒█▓▓▓▓▓▓▓▀██▓█░░░░░░█▓█░ ▒▀███▀▒█▓▓▓▓▓▓▓▓█▀█▀░░░░░░▀█▀░ ▄▒▀▀▀▒█▄▄▄▄▓▓▓▓▓█░░░░░░░░░░░░░ ▀▄▒▒▒▒▄▀▀████▄▄▄█░░░░░░░░░░░░░ █▒▒▒▒▒█▓▓▓▓▓▓▀▀▀█░░░░░░░░░░░░░ █▒▒▒▒█▀▓▓▓▓▓▓▓▓▓█░█░░░░░░░░█░░ █▒▀▀▒█▓▓▓▓▓▓▓▓▓▄▀░██▄▄░░▄▄██░░ █▒▒▒▒█▓▓▓█▓▓▓▓▓█▄░░▀▀████▀▀░░░ ─█▄▄██▄▄▄▀▓▓▓▓▓█▀▄░░░░░░░░░░░░ ───█▀▄▓▓▄▄▓▓▓▓▓█░░█░░░░░░░░░░░ ───█░█▓█░░█▄▓▓█░░░█░░░░░░░░░░░ ───█░█▓█░░░█▓▓█░░▄▀░░░░░░░░░░░ ───▀▄█▓█▄▀▀█▓▓█░█░░░░░░░░░░░░░ ───▄▄█▓▓▀▀▀▄▄▀█▄▀▄░░░░░░░░░░░░ ─▄▀▒▒▒█▀▀▀▀░▄▀██░█░░░░░░░░░░░░ ▄▀▒▒▒▒█░░░░░█▄▀▀█▀░░░░░░░░░░░░');
         done();
       });
     });
   });
+  
+  it('should accept nonstandard multi-line comments', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'NotSoBonoJono',
+        text: meme1}
+    };
 
+    request(requestParams, function(error, response, body) {
+      // Now if we request the log, that message we posted should be there:
+      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+        var messages = JSON.parse(body).results;
+        expect(messages[0].username).to.equal('NotSoBonoJono');
+        expect(messages[0].text).to.equal(meme1);
+        done();
+      });
+    });
+  });
+  
+  it('should accept nonstandard multi-line comments', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'NotSoBonoJono',
+        text: lapras}
+    };
+
+    request(requestParams, function(error, response, body) {
+      // Now if we request the log, that message we posted should be there:
+      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+        var messages = JSON.parse(body).results;
+        expect(messages[0].username).to.equal('NotSoBonoJono');
+        expect(messages[0].text).to.equal(lapras);
+        done();
+      });
+    });
+  });
+  
+  it('should accept nonstandard multi-line comments', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'NoPlayTERAKara',
+        text: salt}
+    };
+
+    request(requestParams, function(error, response, body) {
+      // Now if we request the log, that message we posted should be there:
+      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+        var messages = JSON.parse(body).results;
+        expect(messages[0].username).to.equal('NoPlayTERAKara');
+        expect(messages[0].text).to.equal(salt);
+        done();
+      });
+    });
+  });
+  
   it('Should 404 when asked for a nonexistent endpoint', function(done) {
     request('http://127.0.0.1:3000/arglebargle', function(error, response, body) {
       expect(response.statusCode).to.equal(404);
@@ -73,5 +158,11 @@ describe('server', function() {
     });
   });
 
+  it('should respond to OPTIONS requests for /classes/messages with a 200 status code', function(done) {
+    request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
 
 });
